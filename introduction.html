@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Introduction | Siamesifying the COVID-Net</title>
+  <meta name="description" content="1 Introduction | Siamesifying the COVID-Net" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Introduction | Siamesifying the COVID-Net" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="1 Introduction | Siamesifying the COVID-Net" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Introduction | Siamesifying the COVID-Net" />
+  
+  <meta name="twitter:description" content="1 Introduction | Siamesifying the COVID-Net" />
+  
+
+<meta name="author" content="Roberto Castro Sundin, Tony Rönnqvist, Alejandro Sarmiento González &amp; Simon Westberg" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="sec-methods.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#related-work"><i class="fa fa-check"></i><b>1.1</b> Related Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sec-methods.html"><a href="sec-methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-methods.html"><a href="sec-methods.html#sec:arch"><i class="fa fa-check"></i><b>2.1</b> Siamese Network Architecture</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-methods.html"><a href="sec-methods.html#sec:covid-net"><i class="fa fa-check"></i><b>2.2</b> COVID-Net</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-methods.html"><a href="sec-methods.html#resnet"><i class="fa fa-check"></i><b>2.2.1</b> ResNet</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sec-methods.html"><a href="sec-methods.html#sec:loss"><i class="fa fa-check"></i><b>2.3</b> Loss Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sec-experiments.html"><a href="sec-experiments.html"><i class="fa fa-check"></i><b>3</b> Experiments</a><ul>
+<li class="chapter" data-level="3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:data"><i class="fa fa-check"></i><b>3.1</b> Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:setup"><i class="fa fa-check"></i><b>3.2</b> Experimental Setup</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:validation"><i class="fa fa-check"></i><b>3.2.1</b> Three-way Validation for Siamese Networks</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:testing"><i class="fa fa-check"></i><b>3.2.2</b> Testing the Siamese Network</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:results"><i class="fa fa-check"></i><b>3.3</b> Experimental Results</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#gradcam"><i class="fa fa-check"></i><b>3.3.1</b> GradCAM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sec-conclusions.html"><a href="sec-conclusions.html"><i class="fa fa-check"></i><b>4</b> Conclusions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Siamesifying the COVID-Net</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<style>
+.mathjaxnewcommand {
+  visibility: hidden;
+}
+</style>
+<div class=mathjaxnewcommand>
+\(
+\newcommand{\vec}[1]{\mathbf{#1}}
+\)
+</div>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>Deep learning techniques certainly
+have had a remarkable impact on many research areas in the image analysis
+field within the last decade; in particular, convolutional neural networks
+have become the de facto methodology for analyzing medical images. Use
+cases in the field include classification for disease diagnostic, lesion
+detection and segmentation, organ localization, image generation, and
+enhancement, among others <span class="citation">(Litjens et al. <a href="references.html#ref-medicalimage">2017</a>)</span>. With the use of deep
+learning algorithms, researchers have achieved dermatologist-level
+classifiers of skin cancer <span class="citation">(Esteva et al. <a href="references.html#ref-skincancer">2017</a>)</span> and created both stand-alone
+and radiologist-aiding screeners for breast cancer
+<span class="citation">(Rodriguez-Ruiz et al. <a href="references.html#ref-breastcancer1">2019</a>; Wu et al. <a href="references.html#ref-breastcancer2">2020</a>)</span>. Current success in medical imaging
+suggests that it is possible to outperform human-level expertise in
+specific tasks.
+With this background, it seems reasonable to employ deep neural networks to
+assist medical experts for screening or diagnosing patients with suspected
+cases of the novel coronavirus disease (COVID-19) as early detection is key
+to reduce mortality rates <span class="citation">(Sun et al. <a href="references.html#ref-mortality-rate">2020</a>)</span>. In this work, we explore a
+siamese network structure, based on the recent COVID-Net <span class="citation">(L. Wang and Wong <a href="references.html#ref-covid-net">2020</a>)</span>
+architecture. Training and evaluation are performed on a publicly available
+lung X-ray dataset from healthy patients, as well as from patients with
+confirmed cases of COVID-19 and other non-COVID-19 pneumonia
+<span class="citation">(Cohen, Morrison, and Dao <a href="references.html#ref-covid-data">2020</a>; Rajpurkar et al. <a href="references.html#ref-pneumonia-data">2017</a>)</span>. The results are compared to the
+performance achieved by a non-siamese implementation of the network, also
+based on the COVID-Net architecture. In addition we analyzed the network
+further using GradCAM.
+The justification behind the proposed architecture becomes reasonable since the
+amount of labeled data required to train regular artificial neural networks
+of decent performance is considerable. Hence, there exist two constraints:
+the lack of publicly available datasets of COVID-19 X-Ray or CT scans and
+the amount of useful data that can provide consistent performance. Siamese
+networks can perform relatively well under such constraints, as exemplified
+in <span class="citation">(Lake et al. <a href="references.html#ref-oneshotlearning">2011</a>)</span>, where it was used in a one-shot learning
+context.</p>
+<p>The remainder of this work is organized as follows: related work is treated in
+the following subsection, after which the network architecture is covered in
+more detail in Section <a href="sec-methods.html#sec:methods">2</a>. Section <a href="sec-experiments.html#sec:experiments">3</a>
+describes the data and experimental setup, as well as the proceeding results,
+followed by an analysis of the latter. Finally, concluding remarks are left in
+Section <a href="sec-conclusions.html#sec:conclusions">4</a>.</p>
+<div id="related-work" class="section level2">
+<h2><span class="header-section-number">1.1</span> Related Work</h2>
+<p>Although the SARS-CoV-2 virus outbreak is a recent event, several initiatives
+can already be seen on the deep learning front, both concerning data
+retrieval as well as proposed network architectures. To robustly identify
+the virus, much focus has been put on using radiography imaging and
+computed tomography as these have been proven to be useful indicators of
+the disease <span class="citation">(Litjens et al. <a href="references.html#ref-medicalimage">2017</a>)</span>. Other efforts aim to utilize previous
+knowledge from large X-ray datasets on pneumonia and related lung diseases
+to fine-tune classifiers on different network architectures; accuracy on
+validation sets are shown to be larger than 90 % <span class="citation">(Asnaoui, Chawki, and Idri <a href="references.html#ref-related_diseases">2020</a>)</span> .</p>
+<div id="covid-19" class="section level4 unnumbered">
+<h4>COVID-19</h4>
+<p><span class="citation">L. Wang and Wong (<a href="references.html#ref-covid-net">2020</a>)</span> were one of the first to develop a
+tailor-made network architecture for COVID-19 identification called
+COVID-Net, and – perhaps even more critical – instructions on how to put
+together a dataset – appropriately named COVIDx by the authors – from
+publicly available X-ray images. Other exciting initiatives along the same
+lines include COVNet <span class="citation">(Li et al. <a href="references.html#ref-covnet">2020</a>)</span>, which delivers promising results but,
+unfortunately, uses X-ray images that, at the time of writing, have not
+been made publicly available.</p>
+</div>
+<div id="siamese-networks" class="section level4 unnumbered">
+<h4>Siamese networks</h4>
+<p>The siamese network structure is often attributed
+to <span class="citation">Bromley et al. (<a href="references.html#ref-signature93">1993</a>)</span>, where it was used for signature verification.
+After that, siamese networks have been applied successfully to a wide range
+of subjects: perhaps most famously in face verification such as DeepFace
+<span class="citation">(Taigman et al. <a href="references.html#ref-deepface">2014</a>)</span>, but also in plant identification
+<span class="citation">(Gao et al. <a href="references.html#ref-plantidentification">2018</a>)</span>; real-time object tracking
+<span class="citation">(Zhang et al. <a href="references.html#ref-realtimetracking">2018</a>)</span>; image matching <span class="citation">(Melekhov, Kannala, and Rahtu <a href="references.html#ref-matching">2016</a>; Li et al. <a href="references.html#ref-hashing">2017</a>)</span>; and word
+spotting <span class="citation">(Barakat, Alasam, and El-Sana <a href="references.html#ref-wordspotting">2018</a>)</span>. A careful treatment of the subject can be
+seen in <span class="citation">(Chopra, Hadsell, and Lecun <a href="references.html#ref-similarity">2005</a>)</span>.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sec-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["siamesifying-the-covidnet.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc-depth": 2,
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Experiments | Siamesifying the COVID-Net</title>
+  <meta name="description" content="3 Experiments | Siamesifying the COVID-Net" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Experiments | Siamesifying the COVID-Net" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="3 Experiments | Siamesifying the COVID-Net" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Experiments | Siamesifying the COVID-Net" />
+  
+  <meta name="twitter:description" content="3 Experiments | Siamesifying the COVID-Net" />
+  
+
+<meta name="author" content="Roberto Castro Sundin, Tony Rönnqvist, Alejandro Sarmiento González &amp; Simon Westberg" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sec-methods.html"/>
+<link rel="next" href="sec-conclusions.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#related-work"><i class="fa fa-check"></i><b>1.1</b> Related Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sec-methods.html"><a href="sec-methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-methods.html"><a href="sec-methods.html#sec:arch"><i class="fa fa-check"></i><b>2.1</b> Siamese Network Architecture</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-methods.html"><a href="sec-methods.html#sec:covid-net"><i class="fa fa-check"></i><b>2.2</b> COVID-Net</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-methods.html"><a href="sec-methods.html#resnet"><i class="fa fa-check"></i><b>2.2.1</b> ResNet</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sec-methods.html"><a href="sec-methods.html#sec:loss"><i class="fa fa-check"></i><b>2.3</b> Loss Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sec-experiments.html"><a href="sec-experiments.html"><i class="fa fa-check"></i><b>3</b> Experiments</a><ul>
+<li class="chapter" data-level="3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:data"><i class="fa fa-check"></i><b>3.1</b> Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:setup"><i class="fa fa-check"></i><b>3.2</b> Experimental Setup</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:validation"><i class="fa fa-check"></i><b>3.2.1</b> Three-way Validation for Siamese Networks</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:testing"><i class="fa fa-check"></i><b>3.2.2</b> Testing the Siamese Network</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:results"><i class="fa fa-check"></i><b>3.3</b> Experimental Results</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#gradcam"><i class="fa fa-check"></i><b>3.3.1</b> GradCAM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sec-conclusions.html"><a href="sec-conclusions.html"><i class="fa fa-check"></i><b>4</b> Conclusions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Siamesifying the COVID-Net</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<style>
+.mathjaxnewcommand {
+  visibility: hidden;
+}
+</style>
+<div class=mathjaxnewcommand>
+\(
+\newcommand{\vec}[1]{\mathbf{#1}}
+\)
+</div>
+<div id="sec:experiments" class="section level1">
+<h1><span class="header-section-number">3</span> Experiments</h1>
+<div class="figure" style="text-align: center"><span id="fig:our-net"></span>
+<img src="figures/our-net.svg" alt="The architecture of our implementation of COVID-Net and similarly a component in the siamese network. ReLU activation is applied to all layers and down-sampling is done by 2×2 max-pooling."  />
+<p class="caption">
+Figure 3.1: The architecture of our implementation of COVID-Net and similarly a component in the siamese network. ReLU activation is applied to all layers and down-sampling is done by 2×2 max-pooling.
+</p>
+</div>
+<p>In order to test our hypothesis regarding the siamese network structure, we
+benchmarked a “siamesified” implementation of COVID-Net against a standalone
+implementation of the same network – from now on referred to as
+ – whose architecture is illustrated in Figure <a href="sec-experiments.html#fig:our-net">3.1</a>.</p>
+<div id="sec:data" class="section level2">
+<h2><span class="header-section-number">3.1</span> Dataset</h2>
+<p>The experiments were performed on the dataset COVIDx, which consists of a
+collection of X-ray images from <span class="citation">(Rajpurkar et al. <a href="references.html#ref-pneumonia-data">2017</a>; Cohen, Morrison, and Dao <a href="references.html#ref-covid-data">2020</a>)</span> as well as
+from the <em>Figure 1 COVID-19 Chest X-ray Dataset Initiative</em> <span class="citation">(COVID-Net Team <a href="references.html#ref-figure1">2020</a>)</span>. The dataset defines three classes;
+lungs infected with COVID-19, lungs infected with non-COVID-19 pneumonia, and
+healthy lungs. We used the scripts available in the original COVID-Net
+repository <span class="citation">(L. Wang <a href="references.html#ref-covid_dataset">2020</a>)</span> for collecting the data. For
+validation data, we extracted 20 % of the training data at random for each
+class. The distribution of samples for each class can be seen in
+Table <a href="sec-experiments.html#tab:data">3.1</a>.</p>
+<p>The images were all pre-processed by</p>
+<ol style="list-style-type: decimal">
+<li>Converting to gray-scale.</li>
+<li>Scaling down to 224×224 pixel images using the OpenCV inter-area
+interpolation.</li>
+<li>Dividing all individual pixels by 255 to set the maximum pixel value to 1.</li>
+<li>Normalizing by subtracting and dividing by the global mean and standard
+deviation of the training set, respectively.</li>
+</ol>
+<p>For the siamese network we need pairs of images as input, so for each training
+epoch we extracted all COVID-19 images available for training and randomly
+sampled the same amount of images from the normal as well as the pneumonia
+dataset. This measure was taken to compensate for the imbalance between
+available data for each class. Due to the large amount of same and different
+class pairs that could be created, we limited the data-generation to 5000 pairs
+that were sampled at random during validation for each epoch, and increased to
+12000 pairs when training the final network. An equal amount of same and
+different class pairs for each epoch was used.</p>
+<p>For training the single-net, a similar approach was used; we extracted all
+COVID-19 training images and randomly sampled the same amount of images from
+the normal as well as the pneumonia dataset each epoch, effectively using a
+balanced dataset of 537 images for each epoch.</p>
+<table>
+<caption><span id="tab:data">Table 3.1: </span> Distribution of samples for each class</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center"><strong>COVID-19</strong></th>
+<th align="center"><strong>Normal</strong></th>
+<th align="center"><strong>Pneumonia</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training</td>
+<td align="center">179</td>
+<td align="center">6373</td>
+<td align="center">4361</td>
+</tr>
+<tr class="even">
+<td>Validation</td>
+<td align="center">44</td>
+<td align="center">1593</td>
+<td align="center">1090</td>
+</tr>
+<tr class="odd">
+<td>Testing</td>
+<td align="center">31</td>
+<td align="center">885</td>
+<td align="center">594</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sec:setup" class="section level2">
+<h2><span class="header-section-number">3.2</span> Experimental Setup</h2>
+<p>As mentioned in Section <a href="sec-methods.html#sec:covid-net">2.2</a>, the microarchitecture of each PEPX module
+was not available, so we opted for the following parameters for the number of
+filters in each PEPX module, based on the number of channels in the input
+<span class="math inline">\(\mathtt{nf}\)</span>, fulfilling the PEPX criterion:</p>
+<p><span class="math display">\[\begin{equation}
+\mathtt{nf}
+\overset{\text{proj.}}{\longrightarrow}
+0.5\cdot\mathtt{nf}
+\overset{\text{exp.}}{\longrightarrow}
+0.75\cdot\mathtt{nf}
+\overset{\text{DW.}}{\longrightarrow}
+0.75\cdot\mathtt{nf}
+\overset{\text{proj.}}{\longrightarrow}
+0.5\cdot\mathtt{nf} 
+\overset{\text{exp.}}{\longrightarrow}
+\mathtt{nf}_{\tt out},
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mathtt{nf}_{\tt out}\)</span> is the number of channels in the output. Please
+refer to the source code for details<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.
+Both networks were implemented as TensorFlow <span class="citation">(Abadi et al. <a href="references.html#ref-tensorflow">2015</a>)</span> models
+using the Keras <span class="citation">(Chollet and others <a href="references.html#ref-keras">2015</a>)</span> framework and were trained using
+backpropagation <span class="citation">(Rumelhart, Hinton, and Williams <a href="references.html#ref-backprop">1986</a>)</span> with mini-batch gradient descent, and adaptive
+moment estimation (Adam) <span class="citation">(Kingma and Ba <a href="references.html#ref-adam">2014</a>)</span> for optimizing the learning rate during
+training. For the single-net, we added a last Softmax layer with three units
+to obtain accuracies for each class and we used cross entropy as the loss
+function. We also applied a dropout scheme on the fully connected layers for
+the single-net, using drop-out rates 0.5, 0.2, and 0.2.</p>
+<p>We also made use of GradCAM <span class="citation">(Selvaraju et al. <a href="references.html#ref-gradcam">2019</a>)</span> to produce a coarse heat map
+highlighting the essential regions of an image that corresponds to the
+prediction of the intended class. This was done in order to facilitate the
+understanding of the critical features of the image that the model uses to draw
+its conclusions.</p>
+<div id="sec:validation" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Three-way Validation for Siamese Networks</h3>
+<p>Following the same methods as proposed by <span class="citation">Koch, Zemel, and Salakhutdinov (<a href="references.html#ref-siamese">2015</a>)</span>, we use a
+three-way validation method for the siamese network, where the class of an
+image with corresponding feature vector <span class="math inline">\(\vec{x}\)</span> is predicted by comparing it
+to three other validation images (one for each class), with feature vectors
+<span class="math inline">\(\vec{x}^{(c)}\)</span>, <span class="math inline">\(c=1, 2, 3\)</span>, and choosing the class that maximizes the
+similarity.</p>
+<p>Using the validation set, we created 129 such different three-way validation
+trials, and calculated the validation accuracy as the percentage of correct
+classifications over all 129 trials.</p>
+</div>
+<div id="sec:testing" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Testing the Siamese Network</h3>
+<p>Since the siamese network is trained to predict similarity between images, a
+relevant question is which images you should compare with when testing the
+network. Following a similar approach as in <span class="citation">(Chopra, Hadsell, and Lecun <a href="references.html#ref-similarity">2005</a>)</span>, we created a
+representation of each class by</p>
+<ol style="list-style-type: decimal">
+<li>Calculating the feature vectors outputted by the siamese network when
+run on every training image for each class.</li>
+<li>Calculating the average of all feature vectors for each class.</li>
+</ol>
+<p>This produces a feature vector template for each class, and when presented with
+a test image, we calculated the feature vector outputted by the network when
+run on the test image, and then obtained the similarity between the test image
+and each class template by using the distance measure (eq. <a href="sec-methods.html#eq:distance">(2.1)</a>) and
+the sigmoid layer. Using these scores, the class could then finally be
+predicted as the one with the highest similarity.</p>
+</div>
+</div>
+<div id="sec:results" class="section level2">
+<h2><span class="header-section-number">3.3</span> Experimental Results</h2>
+<p>We first conducted a grid search for sensible values of initial learning rate
+<span class="math inline">\(\eta\)</span> and batch size <span class="math inline">\(\beta\)</span>, with <span class="math inline">\(\eta\in\{10^{-3}, 10^{-4}, 10^{-5}\}\)</span> and
+<span class="math inline">\(\beta\in\{8,16,32\}\)</span>. For the siamese network, the grid search was performed
+on 5000 training pairs per epoch for 20 epochs, and for the single-net we used
+100 epochs. The results of this search can be seen in Table <a href="sec-experiments.html#tab:hyper">3.2</a>.</p>
+<table>
+<caption><span id="tab:hyper">Table 3.2: </span> Best values for hyperparameters <span class="math inline">\(\eta\)</span> and <span class="math inline">\(\beta\)</span> as well
+as the achieved maximum validation accuracy.</caption>
+<thead>
+<tr class="header">
+<th align="left"><strong>Network</strong></th>
+<th align="center"><strong>best</strong> <span class="math inline">\(\eta\)</span></th>
+<th align="center"><strong>best</strong> <span class="math inline">\(\beta\)</span></th>
+<th align="center"><strong>Maximum validation accuracy</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Siamese</td>
+<td align="center">1e-4</td>
+<td align="center">32</td>
+<td align="center">0.736</td>
+</tr>
+<tr class="even">
+<td align="left">Single</td>
+<td align="center">1e-4</td>
+<td align="center">16</td>
+<td align="center">0.795</td>
+</tr>
+</tbody>
+</table>
+<p>We then retrained both the siamese and the single-net using the best <span class="math inline">\(\eta\)</span> and
+<span class="math inline">\(\beta\)</span> found during the grid search. For this final training run, we used
+12000 training pairs per epoch for 50 epochs for the siamese network, and the
+single-net was trained for 100 epochs. For each run, we saved the model that
+achieved the highest validation accuracy. The resulting training plots can be
+seen in Figure <a href="sec-experiments.html#fig:siameseres">3.2</a> and <a href="sec-experiments.html#fig:singleres">3.3</a>. Finally, we used the saved best
+performing networks to calculate the final test accuracy on the test set, shown
+in Table <a href="sec-experiments.html#tab:acc">3.3</a>. The confusion matrices for the test data can be seen in
+Figure <a href="sec-experiments.html#fig:siameseres">3.2</a> and <a href="sec-experiments.html#fig:singleres">3.3</a>. One interesting thing to note is that the
+final test accuracy for the siamese net was about 13 p.p. higher than the best
+validation accuracy. This is probably because the three-way validation task may
+be harder than the final testing. Each trial in the three-way validation is
+only based on measuring the similarity between the validation image and three
+other images, while in the testing we measured the similarity between a test
+image and an average over all training feature vectors produced by the final
+network for each class.</p>
+<table>
+<caption><span id="tab:acc">Table 3.3: </span> Final test accuracy after training for both networks.</caption>
+<thead>
+<tr class="header">
+<th align="left"><strong>Network</strong></th>
+<th align="center"><strong>Final test accuracy</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Siamese</td>
+<td align="center">0.87</td>
+</tr>
+<tr class="even">
+<td align="left">Single</td>
+<td align="center">0.81</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:siameseres"></span>
+<img src="figures/siamesenet.svg" alt="Results for the siamese network: **(a)** Confusion matrix for the test data, where C, N, P indicate COVID-19, Normal and Pneumonia, respectively; **(b)** Loss and 3-way validation accuracy on training and validation data."  />
+<p class="caption">
+Figure 3.2: Results for the siamese network: <strong>(a)</strong> Confusion matrix for the test data, where C, N, P indicate COVID-19, Normal and Pneumonia, respectively; <strong>(b)</strong> Loss and 3-way validation accuracy on training and validation data.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:singleres"></span>
+<img src="figures/singlenet.svg" alt="Results for the single-net: **(a)** Confusion matrix for the test data, where C, N, P indicate COVID-19, Normal and Pneumonia, respectively; **(b)** Loss and accuracy on training and validation data."  />
+<p class="caption">
+Figure 3.3: Results for the single-net: <strong>(a)</strong> Confusion matrix for the test data, where C, N, P indicate COVID-19, Normal and Pneumonia, respectively; <strong>(b)</strong> Loss and accuracy on training and validation data.
+</p>
+</div>
+<div id="gradcam" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> GradCAM</h3>
+<p>To check if the network had learned relevant features during training we
+employed GradCAM <span class="citation">(Petsiuk <a href="references.html#ref-gradcamgit">2019</a>)</span> on the test set to create
+different heat maps. This way we could see if the network had learned the
+features of interest during training. Due to time constraints, we used GradCAM
+only on the single-net.</p>
+<p>The best performing single-net was then once again fed with some images from
+the test set, sampled at random, to produce heat maps. When analyzing the heat
+maps, the results were quite mixed; in some cases, the predictions seemed to be
+based on relevant parts of the input images, for example the lung region, as
+can be seen in Figure <a href="sec-experiments.html#fig:covid-good-6">3.4</a>, while in other cases, the predictions
+seemed to be entirely based on irrelevant artifacts, as can be seen in
+Figure <a href="sec-experiments.html#fig:covid-bad-0">3.5</a>. To try and solve the issue of having predictions based
+on irrelevant artifacts, a second set of experiments were conducted.</p>
+<p>Since the artifacts on the images were mostly present around the border, we
+decided to do additional pre-processing by cropping the images. We then
+retrained the single-net on the cropped images with the same hyper-parameters
+found during the validation phase. The result can be seen in
+Figure <a href="sec-experiments.html#fig:covid-good-6">3.4</a> and Figure <a href="sec-experiments.html#fig:covid-bad-0">3.5</a>.</p>
+<p>Looking at Figure <a href="sec-experiments.html#fig:covid-bad-0">3.5</a> we can see an improvement; more relevant
+features are highlighted, while when looking at Figure <a href="sec-experiments.html#fig:covid-good-6">3.4</a> the
+opposite is true. The results obtained during the GradCAM experiments for the
+COVID-19 class can be extended to the other classes, in the sense that similar
+behaviours were observed when classifying and running the GradCAM analysis on
+Normal images and Pneumonia images. The test accuracy achieved for the
+single-net trained on cropped images was 78 %, <em>i.e.</em>, slightly lower than for the
+non-cropped images.</p>
+<div class="figure" style="text-align: center"><span id="fig:covid-good-6"></span>
+<img src="figures/covid_good_6.svg" alt="GradCAM result for two experiments on the same test X-Ray image."  />
+<p class="caption">
+Figure 3.4: GradCAM result for two experiments on the same test X-Ray image.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:covid-bad-0"></span>
+<img src="figures/covid_bad_0.svg" alt="GradCAM result for two experiments on the same test X-Ray image."  />
+<p class="caption">
+Figure 3.5: GradCAM result for two experiments on the same test X-Ray image.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Source code is available at
+<a href="https://gits-15.sys.kth.se/rosun/DD2424-Project" class="uri">https://gits-15.sys.kth.se/rosun/DD2424-Project</a>.<a href="sec-experiments.html#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sec-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sec-conclusions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["siamesifying-the-covidnet.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc-depth": 2,
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

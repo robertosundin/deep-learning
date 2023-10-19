@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Siamesifying the COVID-Net</title>
+  <meta name="description" content="References | Siamesifying the COVID-Net" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="References | Siamesifying the COVID-Net" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="References | Siamesifying the COVID-Net" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="References | Siamesifying the COVID-Net" />
+  
+  <meta name="twitter:description" content="References | Siamesifying the COVID-Net" />
+  
+
+<meta name="author" content="Roberto Castro Sundin, Tony Rönnqvist, Alejandro Sarmiento González &amp; Simon Westberg" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sec-conclusions.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#related-work"><i class="fa fa-check"></i><b>1.1</b> Related Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sec-methods.html"><a href="sec-methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-methods.html"><a href="sec-methods.html#sec:arch"><i class="fa fa-check"></i><b>2.1</b> Siamese Network Architecture</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-methods.html"><a href="sec-methods.html#sec:covid-net"><i class="fa fa-check"></i><b>2.2</b> COVID-Net</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-methods.html"><a href="sec-methods.html#resnet"><i class="fa fa-check"></i><b>2.2.1</b> ResNet</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sec-methods.html"><a href="sec-methods.html#sec:loss"><i class="fa fa-check"></i><b>2.3</b> Loss Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sec-experiments.html"><a href="sec-experiments.html"><i class="fa fa-check"></i><b>3</b> Experiments</a><ul>
+<li class="chapter" data-level="3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:data"><i class="fa fa-check"></i><b>3.1</b> Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:setup"><i class="fa fa-check"></i><b>3.2</b> Experimental Setup</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:validation"><i class="fa fa-check"></i><b>3.2.1</b> Three-way Validation for Siamese Networks</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:testing"><i class="fa fa-check"></i><b>3.2.2</b> Testing the Siamese Network</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:results"><i class="fa fa-check"></i><b>3.3</b> Experimental Results</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#gradcam"><i class="fa fa-check"></i><b>3.3.1</b> GradCAM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sec-conclusions.html"><a href="sec-conclusions.html"><i class="fa fa-check"></i><b>4</b> Conclusions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Siamesifying the COVID-Net</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<style>
+.mathjaxnewcommand {
+  visibility: hidden;
+}
+</style>
+<div class=mathjaxnewcommand>
+\(
+\newcommand{\vec}[1]{\mathbf{#1}}
+\)
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+
+<div id="refs" class="references">
+<div id="ref-tensorflow">
+<p>Abadi, Martín, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, et al. 2015. “TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems.” <a href="https://www.tensorflow.org">https://www.tensorflow.org</a>.</p>
+</div>
+<div id="ref-related_diseases">
+<p>Asnaoui, Khalid El, Youness Chawki, and Ali Idri. 2020. “Automated Methods for Detection and Classification Pneumonia Based on X-Ray Images Using Deep Learning.” <a href="http://arxiv.org/abs/2003.14363">http://arxiv.org/abs/2003.14363</a>.</p>
+</div>
+<div id="ref-wordspotting">
+<p>Barakat, B. K., R. Alasam, and J. El-Sana. 2018. “Word Spotting Using Convolutional Siamese Network.” In <em>2018 13th Iapr International Workshop on Document Analysis Systems (Das)</em>, 229–34.</p>
+</div>
+<div id="ref-signature93">
+<p>Bromley, Jane, James W Bentz, Léon Bottou, Isabelle Guyon, Yann Lecun, Cliff Moore, Eduard Säckinger, and Roopak Shah. 1993. “Signature Verification Using a ‘Siamese’ Time Delay Neural Network.” <em>International Journal of Pattern Recognition and Artificial Intelligence</em> 7 (4): 669–88.</p>
+</div>
+<div id="ref-keras">
+<p>Chollet, François, and others. 2015. “Keras.” <a href="https://keras.io">https://keras.io</a>.</p>
+</div>
+<div id="ref-similarity">
+<p>Chopra, S, R Hadsell, and Y Lecun. 2005. “Learning a Similarity Metric Discriminatively, with Application to Face Verification.” In <em>2005 Ieee Computer Society Conference on Computer Vision and Pattern Recognition (Cvpr’05)</em>, 1:539–46 vol. 1. IEEE.</p>
+</div>
+<div id="ref-covid-data">
+<p>Cohen, Joseph Paul, Paul Morrison, and Lan Dao. 2020. “COVID-19 Image Data Collection.” <em>arXiv 2003.11597</em>. <a href="https://github.com/ieee8023/covid-chestxray-dataset">https://github.com/ieee8023/covid-chestxray-dataset</a>.</p>
+</div>
+<div id="ref-figure1">
+<p>COVID-Net Team. 2020. “Figure 1 Covid-19 Chest X-Ray Dataset Initiative.” <em>GitHub Repository</em>. <a href="https://github.com/agchung/Figure1-COVID-chestxray-dataset">https://github.com/agchung/Figure1-COVID-chestxray-dataset</a>; GitHub.</p>
+</div>
+<div id="ref-skincancer">
+<p>Esteva, Andre, Brett Kuprel, Roberto A Novoa, Justin Ko, Susan M Swetter, Helen M Blau, and Sebastian Thrun. 2017. “Dermatologist-Level Classification of Skin Cancer with Deep Neural Networks.” <em>Nature</em> 542 (7639): 115–18.</p>
+</div>
+<div id="ref-plantidentification">
+<p>Gao, Zhi-Yong, Heng-Xing Xie, Ji-Feng Li, and Shi-Li Liu. 2018. “Spatial-Structure Siamese Network for Plant Identification.” <em>International Journal of Pattern Recognition and Artificial Intelligence</em> 32 (11): 1850035. <a href="https://doi.org/10.1142/S0218001418500350">https://doi.org/10.1142/S0218001418500350</a>.</p>
+</div>
+<div id="ref-resnet">
+<p>He, Kaiming, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. 2015. “Deep Residual Learning for Image Recognition.” <a href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
+</div>
+<div id="ref-adam">
+<p>Kingma, Diederik P., and Jimmy Ba. 2014. “Adam: A Method for Stochastic Optimization.” <a href="http://arxiv.org/abs/1412.6980">http://arxiv.org/abs/1412.6980</a>.</p>
+</div>
+<div id="ref-siamese">
+<p>Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. 2015. “Siamese Neural Networks for One-Shot Image Recognition.” In <em>ICML Deep Learning Workshop</em>. Vol. 2. Lille.</p>
+</div>
+<div id="ref-oneshotlearning">
+<p>Lake, Brenden, Ruslan Salakhutdinov, Jason Gross, and Joshua Tenenbaum. 2011. “One Shot Learning of Simple Visual Concepts.” In <em>Proceedings of the Annual Meeting of the Cognitive Science Society</em>. Vol. 33. 33.</p>
+</div>
+<div id="ref-covnet">
+<p>Li, Lin, Lixin Qin, Zeguo Xu, Youbing Yin, Xin Wang, Bin Kong, Junjie Bai, et al. 2020. “Artificial Intelligence Distinguishes Covid-19 from Community Acquired Pneumonia on Chest Ct.” <em>Radiology</em>, 200905.</p>
+</div>
+<div id="ref-hashing">
+<p>Li, Yang, Zhuang Miao, Jiabao Wang, Yafei Zhang, and Hang Li. 2017. “Deep Discriminative Supervised Hashing via Siamese Network.” <em>IEICE Transactions on Information and Systems</em> E100.D (12): 3036–40. <a href="https://doi.org/10.1587/transinf.2017EDL8126">https://doi.org/10.1587/transinf.2017EDL8126</a>.</p>
+</div>
+<div id="ref-medicalimage">
+<p>Litjens, Geert, Thijs Kooi, Babak Ehteshami Bejnordi, Arnaud Arindra Adiyoso Setio, Francesco Ciompi, Mohsen Ghafoorian, Jeroen A.W.M. van der Laak, Bram van Ginneken, and Clara I. Sánchez. 2017. “A Survey on Deep Learning in Medical Image Analysis.” <em>Medical Image Analysis</em> 42 (December): 60–88. <a href="https://doi.org/10.1016/j.media.2017.07.005">https://doi.org/10.1016/j.media.2017.07.005</a>.</p>
+</div>
+<div id="ref-matching">
+<p>Melekhov, I., J. Kannala, and E. Rahtu. 2016. “Siamese Network Features for Image Matching.” In <em>2016 23rd International Conference on Pattern Recognition (Icpr)</em>, 378–83. <a href="https://doi.org/10.1109/ICPR.2016.7899663">https://doi.org/10.1109/ICPR.2016.7899663</a>.</p>
+</div>
+<div id="ref-gradcamgit">
+<p>Petsiuk, Vitali. 2019. “Keras-Gradcam.” <em>GitHub Repository</em>. <a href="https://github.com/eclique/keras-gradcam">https://github.com/eclique/keras-gradcam</a>; GitHub.</p>
+</div>
+<div id="ref-pneumonia-data">
+<p>Rajpurkar, Pranav, Jeremy Irvin, Kaylie Zhu, Brandon Yang, Hershel Mehta, Tony Duan, Daisy Ding, et al. 2017. “Chexnet: Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep Learning.” <em>arXiv Preprint arXiv:1711.05225</em>.</p>
+</div>
+<div id="ref-breastcancer1">
+<p>Rodriguez-Ruiz, Alejandro, Kristina Lång, Albert Gubern-Merida, Mireille Broeders, Gisella Gennaro, Paola Clauser, Thomas H Helbich, et al. 2019. “Stand-Alone Artificial Intelligence for Breast Cancer Detection in Mammography: Comparison With 101 Radiologists.” <em>JNCI: Journal of the National Cancer Institute</em> 111 (9): 916–22. <a href="https://doi.org/10.1093/jnci/djy222">https://doi.org/10.1093/jnci/djy222</a>.</p>
+</div>
+<div id="ref-backprop">
+<p>Rumelhart, David E., Geoffrey E. Hinton, and Ronald J. Williams. 1986. “Learning Representations by Back-Propagating Errors.” <em>Nature</em> 323 (6088): 533.</p>
+</div>
+<div id="ref-gradcam">
+<p>Selvaraju, Ramprasaath R., Abhishek Das, Ramakrishna Vedantam, Michael Cogswell, Devi Parikh, and Dhruv Batra. 2019. “Grad-Cam: Visual Explanations from Deep Networks via Gradient-Based Localization.” <em>International Journal of Computer Vision</em> 128: 336–59.</p>
+</div>
+<div id="ref-mortality-rate">
+<p>Sun, Qin, Haibo Qiu, Mao Huang, and Yi Yang. 2020. “Lower Mortality of Covid-19 by Early Recognition and Intervention: Experience from Jiangsu Province.” <em>Annals of Intensive Care</em> 10 (1). <a href="https://doi.org/10.1186/s13613-020-00650-2">https://doi.org/10.1186/s13613-020-00650-2</a>.</p>
+</div>
+<div id="ref-deepface">
+<p>Taigman, Y., M. Yang, M. Ranzato, and L. Wolf. 2014. “DeepFace: Closing the Gap to Human-Level Performance in Face Verification.” In <em>2014 Ieee Conference on Computer Vision and Pattern Recognition</em>, 1701–8. <a href="https://doi.org/10.1109/CVPR.2014.220">https://doi.org/10.1109/CVPR.2014.220</a>.</p>
+</div>
+<div id="ref-covid_dataset">
+<p>Wang, Linda. 2020. “COVID-Net.” <em>GitHub Repository</em>. <a href="https://github.com/lindawangg/COVID-Net">https://github.com/lindawangg/COVID-Net</a>; GitHub.</p>
+</div>
+<div id="ref-covid-net">
+<p>Wang, Linda, and Alexander Wong. 2020. “COVID-Net: A Tailored Deep Convolutional Neural Network Design for Detection of Covid-19 Cases from Chest Radiography Images.” <a href="http://arxiv.org/abs/2003.09871">http://arxiv.org/abs/2003.09871</a>.</p>
+</div>
+<div id="ref-breastcancer2">
+<p>Wu, N., J. Phang, J. Park, Y. Shen, Z. Huang, M. Zorin, S. Jastrzębski, et al. 2020. “Deep Neural Networks Improve Radiologists’ Performance in Breast Cancer Screening.” <em>IEEE Transactions on Medical Imaging</em> 39 (4): 1184–94.</p>
+</div>
+<div id="ref-realtimetracking">
+<p>Zhang, Yunhua, Lijun Wang, Jinqing Qi, Dong Wang, Mengyang Feng, and Huchuan Lu. 2018. “Structured Siamese Network for Real-Time Visual Tracking.” In <em>Computer Vision – Eccv 2018</em>, edited by Vittorio Ferrari, Martial Hebert, Cristian Sminchisescu, and Yair Weiss, 355–70. Cham: Springer International Publishing.</p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sec-conclusions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["siamesifying-the-covidnet.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc-depth": 2,
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

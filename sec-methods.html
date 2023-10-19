@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Methods | Siamesifying the COVID-Net</title>
+  <meta name="description" content="2 Methods | Siamesifying the COVID-Net" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Methods | Siamesifying the COVID-Net" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="2 Methods | Siamesifying the COVID-Net" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Methods | Siamesifying the COVID-Net" />
+  
+  <meta name="twitter:description" content="2 Methods | Siamesifying the COVID-Net" />
+  
+
+<meta name="author" content="Roberto Castro Sundin, Tony Rönnqvist, Alejandro Sarmiento González &amp; Simon Westberg" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="sec-experiments.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#related-work"><i class="fa fa-check"></i><b>1.1</b> Related Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sec-methods.html"><a href="sec-methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-methods.html"><a href="sec-methods.html#sec:arch"><i class="fa fa-check"></i><b>2.1</b> Siamese Network Architecture</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-methods.html"><a href="sec-methods.html#sec:covid-net"><i class="fa fa-check"></i><b>2.2</b> COVID-Net</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-methods.html"><a href="sec-methods.html#resnet"><i class="fa fa-check"></i><b>2.2.1</b> ResNet</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sec-methods.html"><a href="sec-methods.html#sec:loss"><i class="fa fa-check"></i><b>2.3</b> Loss Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sec-experiments.html"><a href="sec-experiments.html"><i class="fa fa-check"></i><b>3</b> Experiments</a><ul>
+<li class="chapter" data-level="3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:data"><i class="fa fa-check"></i><b>3.1</b> Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:setup"><i class="fa fa-check"></i><b>3.2</b> Experimental Setup</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:validation"><i class="fa fa-check"></i><b>3.2.1</b> Three-way Validation for Siamese Networks</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:testing"><i class="fa fa-check"></i><b>3.2.2</b> Testing the Siamese Network</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sec-experiments.html"><a href="sec-experiments.html#sec:results"><i class="fa fa-check"></i><b>3.3</b> Experimental Results</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sec-experiments.html"><a href="sec-experiments.html#gradcam"><i class="fa fa-check"></i><b>3.3.1</b> GradCAM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sec-conclusions.html"><a href="sec-conclusions.html"><i class="fa fa-check"></i><b>4</b> Conclusions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Siamesifying the COVID-Net</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<style>
+.mathjaxnewcommand {
+  visibility: hidden;
+}
+</style>
+<div class=mathjaxnewcommand>
+\(
+\newcommand{\vec}[1]{\mathbf{#1}}
+\)
+</div>
+<div id="sec:methods" class="section level1">
+<h1><span class="header-section-number">2</span> Methods</h1>
+<div id="sec:arch" class="section level2">
+<h2><span class="header-section-number">2.1</span> Siamese Network Architecture</h2>
+<p>The siamese network structure is perhaps most easily explained as two ordinary
+neural networks working side-by-side, where the “siamese” part comes from the
+fact that the two networks are of the same structure and share the same
+weights. In a typical setup, the networks are combined at the end by
+incorporating them into some distance norm or similarity measure, as
+illustrated in Figure <a href="sec-methods.html#fig:siamese-arch">2.1</a>. The formulation of the training problem
+then transitions from the standard <em>“find the weights that minimize the
+prediction error”</em> into <em>“find the weights that minimize the distance
+between similar categories while keeping the distance between non-similar
+categories large”</em>. Hence, siamese networks prove particularly helpful in
+situations where the categories are not known a priori or when no sensible
+metric exists, such as might be the case in face verification or image
+matching. Siamese networks have also proven successful in situations where
+available training examples are limited, such as for the Omniglot
+set<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <span class="citation">(Koch, Zemel, and Salakhutdinov <a href="references.html#ref-siamese">2015</a>)</span>. This particular
+property is what makes us believe that a siamese network structure might be
+useful for our purpose, since the available training examples for COVID-19
+classification are few.</p>
+<div class="figure" style="text-align: center"><span id="fig:siamese-arch"></span>
+<img src="figures/siamese-arch.svg" alt="Typical structure of a siamese network. The function $d$ denotes a similarity measure."  />
+<p class="caption">
+Figure 2.1: Typical structure of a siamese network. The function <span class="math inline">\(d\)</span> denotes a similarity measure.
+</p>
+</div>
+<p>When it comes to the distance measure there are, of course, several candidates
+to choose from. In this work we will use a scaled version of the <span class="math inline">\(L_1\)</span>-norm, so
+that the distance measure <span class="math inline">\(d:\mathbb{R}^N\times\mathbb{R}^N \to \mathbb{R}\)</span> is given by
+<span class="math display" id="eq:distance">\[\begin{equation}
+    d(\vec{x},\vec{y}) = \left\lVert\vec{x}-\vec{y}\right\rVert = \sum_{i=1}^N \alpha_i \left| x_i-y_i  \right|,
+\tag{2.1}
+\end{equation}\]</span>
+for a set of scaling weights <span class="math inline">\(\left\{ \alpha_i \right\}_{i=1}^N\)</span>, which
+consequently also have to be optimized during training. The purpose of these
+weights is to identify certain dimensions of extra interest. An interesting
+byproduct by using a norm and the structure in Figure <a href="sec-methods.html#fig:siamese-arch">2.1</a>, is that
+we automatically fulfill a symmetry condition, <em>i.e.</em>, switching places between
+the images does not change the output.</p>
+</div>
+<div id="sec:covid-net" class="section level2">
+<h2><span class="header-section-number">2.2</span> COVID-Net</h2>
+<p>Motivated by the current COVID-19 pandemic, several solutions based on deep
+learning have been developed around the world; however, most of these solutions
+are not open source. Therefore, COVID-Net was developed with this purpose, as a
+convolutional neural network specifically designed to assist in the detection
+of COVID-19 in chest X-ray images. This network was developed by <span class="citation">L. Wang and Wong (<a href="references.html#ref-covid-net">2020</a>)</span> as
+part of Darwin AI with the assist of Gensynth, a generative
+synthesis platform aimed at automatically generating a set of compact and fast
+neural networks, provided an initial architecture. Hence, COVID-Net was
+initially created by human design, following best practices, and optimized by
+an AI. COVID-Net, as is, provides the capability of asserting if the presented
+chest X-Ray image is healthy, has a non-COVID-19, or a COVID-19 infection with
+a sensitivity &gt;80 % <span class="citation">(L. Wang and Wong <a href="references.html#ref-covid-net">2020</a>)</span>. The inner microarchitecture of some of
+the modules and parts of the network were designed with Gensynth and not made
+publicly available; therefore, it is not possible to replicate the exact model
+for open-source experimentation. However, the general structure of the
+architecture, as described by the authors, is as follows. The network is mainly
+composed of several computationally efficient PEPX modules
+(projection-expansion-projection-extension) which consist of <span class="citation">(L. Wang and Wong <a href="references.html#ref-covid-net">2020</a>)</span>:</p>
+<ul>
+<li><strong>First-stage Projection:</strong> 1×1 convolution to project data
+with a higher number of channels into a tensor with a lower channel
+dimension.</li>
+<li><strong>Expansion:</strong> 1×1 convolution used to expand the number of
+channels, maps the features into a higher dimension, achieving more output
+channels than input channels.</li>
+<li><strong>DW Convolution:</strong> 3×3 depth-wise convolution to preserve
+representation and learn key spatial features needed to reduce
+computational complexity.</li>
+<li><strong>Second-stage Projection:</strong> 1×1 convolution to project data
+with a higher number of channels into a tensor with a lower number of
+channels.</li>
+<li><strong>Extension:</strong> 1×1 convolution used to extend the number of
+channels in the output, used to produce the resulting features of the
+module.</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:pepx"></span>
+<img src="figures/pepx.svg" alt="The PEPX Module." width="25%" />
+<p class="caption">
+Figure 2.2: The PEPX Module.
+</p>
+</div>
+<p>As part of the design achieved by Gensynth, COVID-Net makes use of skip
+connections over all the architecture, to achieve a higher level of granularity
+and avoid degradation. The concept of skip connections is explored next.</p>
+<div id="resnet" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> ResNet</h3>
+<div class="figure" style="text-align: center"><span id="fig:resnetfig"></span>
+<img src="figures/resnetfig.svg" alt="ResNet building block." width="35%" />
+<p class="caption">
+Figure 2.3: ResNet building block.
+</p>
+</div>
+<p>As the depth of neural networks increase, it becomes more difficult to train.
+Intuitively, increasing the depth of a neural network should help in learning
+better and with increased accuracy. However, in reality as the depth of a
+network increases, it has been observed that the accuracy gets saturated and
+decays whenever the model starts to converge, which ultimately translates into
+a higher training error and lower accuracy than that of shallower networks.
+This particular behaviour has been addressed as <em>degradation</em> and it may
+be attributed to the fact that not all architectures are easy to optimize
+properly or are prone to vanishing gradients. To alleviate this problem,
+residual learning was introduced in late 2015 by <span class="citation">He et al. (<a href="references.html#ref-resnet">2015</a>)</span> as part of
+<em>residual networks</em>. The general idea is summarized in
+Figure <a href="sec-methods.html#fig:resnetfig">2.3</a>, where skipping connections are also introduced. In normal
+neural networks, we try to learn a true output <span class="math inline">\(\mathcal{H}(\vec x)\)</span>, given an
+input <span class="math inline">\(\vec x\)</span>, whereas residual networks instead try to approximate the
+residual <span class="math inline">\(\mathcal{F}(\vec x) := \mathcal{H}(\vec x)-\vec x\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> We
+can then reconstruct the true output <span class="math inline">\(\mathcal{H}(\vec x)\)</span> from</p>
+<p><span class="math display">\[\begin{equation}
+\mathcal{H}(\vec x) = \mathcal{F}(\vec x)+ \vec x.
+\end{equation}\]</span></p>
+<p>Thanks to this reformulation of what the network should learn and by skipping
+<span class="math inline">\(n\)</span> layers, it has been found that deeper neural networks are easier to train
+and should not achieve (in general) a higher training error than that of
+shallower networks <span class="citation">(He et al. <a href="references.html#ref-resnet">2015</a>)</span>. This subsequently implies that gradients can
+be propagated faster to initial layers, which help with accelerating the
+learning and allowing deep architecture to be trained. As a side effect, the
+number of connections that can be skipped to achieve better results can be
+turned into a parameter that can be optimized. In the COVID-Net design for
+instance, this is taken into consideration.</p>
+</div>
+</div>
+<div id="sec:loss" class="section level2">
+<h2><span class="header-section-number">2.3</span> Loss Function</h2>
+<p>The distance measure defined in Equation <a href="sec-methods.html#eq:distance">(2.1)</a> will, for every image pair,
+return the output of whether the two images are close with respect to the inner
+representation of the network. The question that we want to answer is, however,
+if two images are of the same class or not. Following the same approach as in
+<span class="citation">(Lake et al. <a href="references.html#ref-oneshotlearning">2011</a>)</span>, we applied a sigmoid function on the distance output,
+to produce a similarity output between 0 and 1. The output is thus binary, and
+consequently we used the binary cross entropy as loss function
+<span class="math inline">\(\ell_{\text{cr}}\)</span> given by</p>
+<p><span class="math display" id="eq:loss">\[\begin{equation}
+\ell_{\text{cr}}(\vec{y},\vec{p}) = -\vec{y}^T\log(\vec{p}),
+\tag{2.2}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\vec{y}\)</span> is a one-hot encoding vector and <span class="math inline">\(\vec{p}\)</span> the probability
+vector of whether two images belong to the same class or not.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The Omniglot set is referred to by the authors (<span class="citation">Lake et al. (<a href="references.html#ref-oneshotlearning">2011</a>)</span>)
+as the “transpose” of MNIST because of its large set of categories
+and low amount of examples.<a href="sec-methods.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Provided that <span class="math inline">\(\mathcal{H}({\vec{x}})\)</span> and <span class="math inline">\({\vec{x}}\)</span> are of the
+same dimension.<a href="sec-methods.html#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sec-experiments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["siamesifying-the-covidnet.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc-depth": 2,
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
